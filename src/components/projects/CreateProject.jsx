@@ -8,13 +8,11 @@ let [ state, setState] = useState({})
 
 setState = ( e ) => { 
   state[ e.target.id ] = e.target.value
-  console.log( state )
-  return state
 }
 
 const handleSubmit = ( e ) => {
   e.preventDefault()
-  return state = {}
+  props.createProject( state )
 }
 
 return (
@@ -24,12 +22,12 @@ return (
         Создать новый проект
       </h5>
       <div className = "input-field">
-        <label htmlFor = "projectTitle">Название проекта</label>
-        <input type = "text" id = "projectTitle" onChange = { setState }/>
+        <label htmlFor = "title">Название проекта</label>
+        <input type = "text" id = "title" onChange = { setState }/>
       </div>
       <div className = "input-field">
-        <label htmlFor = "projectDescription">Описание проекта</label>
-        <textarea id = "projectDescription" 
+        <label htmlFor = "content">Описание проекта</label>
+        <textarea id = "content" 
                   className = "materialize-textarea" 
                   onChange = { setState }>
         </textarea>
@@ -45,10 +43,10 @@ return (
 }
 
 
-const mapStateToProps = ( state ) => {
+const mapDispatchToProps = ( dispatch ) => {
   return {
-
+    createProject:( payload ) => dispatch( createProject( payload ))
   }
 }
 
-export default connect( mapStateToProps )( CreateProject )
+export default connect( null, mapDispatchToProps )( CreateProject )
