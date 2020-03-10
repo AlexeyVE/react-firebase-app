@@ -43,10 +43,4 @@ return (
 }
 
 
-const mapDispatchToProps = ( dispatch ) => {
-  return {
-    createProject:( payload ) => dispatch( createProject( payload ))
-  }
-}
-
-export default connect( null, mapDispatchToProps )( CreateProject )
+export default connect( null, { createProject } )( CreateProject )

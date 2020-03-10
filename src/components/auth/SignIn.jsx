@@ -1,37 +1,50 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
 
-const SignIn = ( props ) => {
+import { signIn } from '../../reducers/authReducer'
 
-let [ state, setState ] = useState({})
+const SignIn = (props) => {
 
-setState = ( e ) => {
-  state[ e.target.id ] = e.target.value
-  console.log( state )
-}
-const handleSubmit = ( e ) => {
-  e.preventDefault()
-  state = {}
-  console.log(state)
-}
+  const { signIn, authError } = props
 
-return (
-  <div className = "container">
-    <form onSubmit = { handleSubmit }  className = "white">
-      <h5 className = "grey-text text-darken-3">Войти</h5>
-      <div className = "input-field">
-        <label htmlFor = "email">Почта</label>
-        <input type = "email" id = "email" onChange = { setState }/>
+  let [ state, setState ] = useState({})
+
+  setState = (e) => {
+    state[ e.target.id ] = e.target.value
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault()
+      signIn(state)
+  }
+  return (
+    <div className = "container">
+      <form onSubmit = { handleSubmit }  className = "white">
+        <h5 className = "grey-text text-darken-3">Войти</h5>
+        <div className = "input-field">
+          <label htmlFor = "email">Почта</label>
+          <input type = "email" id = "email" onChange = { setState }/>
+        </div>
+        <div className = "input-field">
+          <label htmlFor = "password">Пароль</label>
+          <input type = "password" id = "password" onChange = { setState } />
+        </div>
+        <div className = "input-field">
+          <button className = "waves-effect waves-light btn btn orange lighten-1 z-depth-0">
+            Вход
+          </button>
+        </div>
+      </form>
+      <div className="red-text center">
+        { authError ? <p>{ authError }</p> : null }
       </div>
-      <div className = "input-field">
-        <label htmlFor = "password">Пароль</label>
-        <input type = "password" id = "password" onChange = { setState } />
-      </div>
-      <div className = "input-field">
-        <button className = "waves-effect waves-light btn btn orange lighten-1 z-depth-0">Вход</button>
-      </div>
-    </form>
-  </div>
+    </div>
   )
 }
 
-export default SignIn
+const mapStateToProps = (state) => {
+  return {
+    authError: state.auth.authError
+  }
+}
+
+export default connect(mapStateToProps, { signIn })(SignIn)

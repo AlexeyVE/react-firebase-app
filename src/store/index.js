@@ -8,11 +8,11 @@ import rootReducer from '../reducers/'
 
 
 const middlewares = [
-  logger,
-  thunk.withExtraArgument( { getFirebase, getFirestore })
+  thunk.withExtraArgument( { getFirebase, getFirestore }),
+  logger
 ]
 
 export default createStore( rootReducer,compose(
-  applyMiddleware( ...middlewares ),reduxFirestore(fbConfig))
+  applyMiddleware( ...middlewares ),reduxFirestore( fbConfig ))
 )
 
