@@ -1,18 +1,23 @@
 import React, { useState } from 'react'
-
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
+import { signUp } from '../../reducers/authReducer'
+ 
 const SignUp = ( props ) => {
+
+const { auth, signUp, authError } = props
 
 let [ state, setState] = useState({})
 
 setState = ( e ) => { 
   state[ e.target.id ] = e.target.value
-  console.log( state )
-}
-const handleSubmit = ( e ) => {
-  e.preventDefault()
-  return state = {}
 }
 
+const handleSubmit = ( e ) => {
+  e.preventDefault()
+  signUp(state)
+}
+if (auth.uid) return <Redirect to = "/" />
 return (
   <div className = "container">
     <form onSubmit = { handleSubmit }  className = "white">
@@ -41,8 +46,19 @@ return (
         </button>
       </div>
     </form>
+    <div className="red-text center">
+        { authError ? <p>{ authError }</p> : null }
+    </div>
   </div>
   )
 }
 
-export default SignUp
+const mapStateToProps = (state) => {
+  return {
+    authError: state.auth.authError,
+    auth: state.firebase.auth
+  }
+}
+
+
+export default connect(mapStateToProps,{ signUp })(SignUp)

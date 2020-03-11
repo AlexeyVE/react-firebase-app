@@ -1,21 +1,23 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
 import { signIn } from '../../reducers/authReducer'
 
 const SignIn = (props) => {
 
-  const { signIn, authError } = props
+  const { signIn, authError, auth } = props
 
   let [ state, setState ] = useState({})
 
   setState = (e) => {
     state[ e.target.id ] = e.target.value
   }
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-      signIn(state)
+    signIn(state)
   }
+  if (auth.uid) return <Redirect to = "/" />
   return (
     <div className = "container">
       <form onSubmit = { handleSubmit }  className = "white">
@@ -29,7 +31,7 @@ const SignIn = (props) => {
           <input type = "password" id = "password" onChange = { setState } />
         </div>
         <div className = "input-field">
-          <button className = "waves-effect waves-light btn btn orange lighten-1 z-depth-0">
+          <button  className = "waves-effect waves-light btn btn orange lighten-1 z-depth-0">
             Вход
           </button>
         </div>
@@ -43,7 +45,8 @@ const SignIn = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    authError: state.auth.authError
+    authError: state.auth.authError,
+    auth: state.firebase.auth
   }
 }
 

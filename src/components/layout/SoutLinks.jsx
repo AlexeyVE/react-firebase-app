@@ -6,7 +6,7 @@ const SoutLinks = ( props ) =>
   return(
     <ul className="right">
       <li>
-        <NavLink to="/signup">Зарегестрироватся</NavLink>
+        <NavLink to="/signup">Зарегистрироваться</NavLink>
       </li>
       <li>
         <NavLink to="/signin">Войти</NavLink>

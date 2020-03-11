@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import store from './store/'
 import { Provider } from 'react-redux'
 import { useSelector } from 'react-redux'
-import { ReactReduxFirebaseProvider ,isLoaded} from 'react-redux-firebase'
+import { ReactReduxFirebaseProvider ,isLoaded } from 'react-redux-firebase'
 import { createFirestoreInstance } from 'redux-firestore'
 import firebase from './firebase/firebaseConfig'
 

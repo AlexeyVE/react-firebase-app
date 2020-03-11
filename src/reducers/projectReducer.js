@@ -21,12 +21,11 @@ export default (state = INITIAL_STATE, action) => {
 // actions
 const create_project = (payload) => ({ type: CREATE_PROJECT,project: payload })
 const create_project_error = (err) => ({ type :CREATE_PROJECT_ERROR, err })
-
 // thunks
 export const createProject = (payload)  => 
-  ( dispatch, getState, { getFirebase, getFirestore }) => {
+  (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
-    firestore.collection( 'projects' ).add({
+    return firestore.collection( 'projects' ).add({
      ...payload,
      authorId: 12345,
      createAt: new Date()

@@ -10,7 +10,7 @@ const SinLinks = (props) => {
         <NavLink to = "/create-project">Новый проект</NavLink>
       </li>
       <li>
-        <a onClick = { props.signOut } >Выйти</a>
+        <a href = "/" onClick = { props.signOut } >Выйти</a>
       </li>
       <li>
         <NavLink to = "/" className = "btn btn-floating  orange lighten-1 ">AV</NavLink>
