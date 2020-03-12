@@ -2,10 +2,13 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
+import moment from 'moment'
+import 'moment/locale/ru'
 import { withAuth } from '../hoc/'
 
 const ProjectDetails = ( props ) => {
   const { project } = props
+  // moment.locale('ru')
   if ( project ) {
     return (
       <div className = "container section project-details">
@@ -15,8 +18,8 @@ const ProjectDetails = ( props ) => {
             <p> { project.content } </p>
           </div>
           <div className = "card-action grey lighten-4 grey-text">
-            <div>Сообщение от { project.authorFirstName } { project.authorLastName }</div>
-            <div>{ project.createAt.seconds }</div>
+            <div>Добавлено: { project.authorFirstName } { project.authorLastName }</div>
+            <div>{ moment(project.createAt.toDate()).calendar()}</div>
           </div>
         </div>
       </div>

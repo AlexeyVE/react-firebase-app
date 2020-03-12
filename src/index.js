@@ -2,10 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import store from './store/'
 import { Provider } from 'react-redux'
-import { useSelector } from 'react-redux'
-import { ReactReduxFirebaseProvider ,isLoaded } from 'react-redux-firebase'
+import { ReactReduxFirebaseProvider } from 'react-redux-firebase'
 import { createFirestoreInstance } from 'redux-firestore'
 import firebase from './firebase/firebaseConfig'
+import { AuthIsLoaded } from './components/hoc/'
 
 import App from './App'
 import * as serviceWorker from './serviceWorker'
@@ -22,11 +22,7 @@ const rrfProps = {
   dispatch: store.dispatch,
   createFirestoreInstance 
 }
-const AuthIsLoaded = ({ children }) => {
-  const auth = useSelector(state => state.firebase.auth)
-  if (!isLoaded(auth)) return <div className = "app-preloader">Loading...</div>;
-  return children
-}
+
 
 ReactDOM.render(
   <Provider store = { store }>

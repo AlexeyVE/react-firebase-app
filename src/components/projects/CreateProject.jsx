@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
-import { createProject } from '../../actions/projectActions'
+import { createProject } from '../../reducers/projectReducer'
 import { withAuth } from '../hoc/'
 
 const CreateProject = ( props ) => {
+
+  const { createProject, history } = props 
 
   let [ state, setState] = useState({})
 
@@ -14,7 +16,8 @@ const CreateProject = ( props ) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    props.createProject(state)
+    createProject(state) 
+    history.push('/')    
   }
 
   return (
@@ -45,4 +48,4 @@ const CreateProject = ( props ) => {
 }
 
 
-export default compose(connect( null, { createProject } ),withAuth)( CreateProject )
+export default compose(connect(null, { createProject } ),withAuth)(CreateProject)

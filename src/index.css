@@ -25,7 +25,7 @@ form {
 form button, form h5 {
   margin: 20px 0;
 }
-input, label {
+input, textarea, label{
   padding: none !important;
   padding-left: 10px !important;
 }

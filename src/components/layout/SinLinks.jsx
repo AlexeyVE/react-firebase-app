@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { signOut } from '../../reducers/authReducer'
 
 const SinLinks = (props) => {
+  const { profile } = props
   return(
     <ul className = "right">
       <li>
@@ -13,7 +14,9 @@ const SinLinks = (props) => {
         <a href = "/" onClick = { props.signOut } >Выйти</a>
       </li>
       <li>
-        <NavLink to = "/" className = "btn btn-floating  orange lighten-1 ">AV</NavLink>
+        <NavLink to = "/" className = "btn btn-floating  orange lighten-1 ">
+          { profile.initials }
+        </NavLink>
       </li>
     </ul>
   )

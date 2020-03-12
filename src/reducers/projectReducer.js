@@ -24,10 +24,14 @@ const create_project_error = (err) => ({ type :CREATE_PROJECT_ERROR, err })
 // thunks
 export const createProject = (payload)  => 
   (dispatch, getState, { getFirebase, getFirestore }) => {
-    const firestore = getFirestore();
+    const firestore = getFirestore()
+    const profile = getState().firebase.profile
+    const authorId = getState().firebase.auth.uid
     return firestore.collection( 'projects' ).add({
      ...payload,
-     authorId: 12345,
+     authorFirstName: profile.firstName,
+     authorLastName: profile.lastName,
+     authorId: authorId,
      createAt: new Date()
     }).then(() => dispatch( create_project( payload )))
     .catch(( err ) => dispatch( create_project_error( err )))    
