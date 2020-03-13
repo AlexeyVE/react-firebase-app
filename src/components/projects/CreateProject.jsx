@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
+// import PropTypes from 'prop-types'
 import { createProject } from '../../reducers/projectReducer'
 import { withAuth } from '../hoc/'
 
@@ -16,8 +17,8 @@ const CreateProject = ( props ) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    createProject(state) 
-    history.push('/')    
+    createProject(state)
+    history.push('/')  
   }
 
   return (
@@ -46,6 +47,8 @@ const CreateProject = ( props ) => {
     </div>
   )
 }
+// createProject.propTypes = {
 
+// }
 
 export default compose(connect(null, { createProject } ),withAuth)(CreateProject)

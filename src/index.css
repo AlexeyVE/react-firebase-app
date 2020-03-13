@@ -41,3 +41,8 @@ textarea.materialize-textarea:focus:not([readonly]) {
 .border {
   border: 1px solid #b3e5fc;
 }
+ul.notification li {
+/*  padding: 10px;*/
+  margin-bottom: 10px;
+}
+

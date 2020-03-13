@@ -8,8 +8,7 @@ import { withAuth } from '../hoc/'
 
 
 const Dashboard = (props) => {
-  const { projects } = props
-  console.log(props)
+  const { projects, notifications } = props
   return (
     <div className = "dashboard container">
       <div className = "row">
@@ -17,7 +16,7 @@ const Dashboard = (props) => {
           <ProjectList projects = { projects } />
         </div>
         <div className = "col s12 m5 offset-m1">
-          <Notifications />
+          <Notifications notifications = { notifications }/>
         </div>
       </div>
     </div>
@@ -26,12 +25,14 @@ const Dashboard = (props) => {
 
 const mapStateToProps = ( state ) => {
   return {
-    projects: state.firestore.ordered.projects
+    projects: state.firestore.ordered.projects,
+    notifications: state.firestore.ordered.notifications
   }
 }
 export default compose(
   connect(mapStateToProps),
   firestoreConnect([
-    { collection: 'projects' }
+    {collection: 'projects', orderBy:['createAt','desc']},
+    {collection: 'notifications', limit:3, orderBy:['time','desc']}
   ]),withAuth
 )(Dashboard)

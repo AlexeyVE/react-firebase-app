@@ -65,22 +65,15 @@ export const signIn = (credentials) =>
     .catch(err => dispatch(sign_in_error(err.message)))
   }
  
-// export const signIn = (credentials) => {
-//   (dispatch, getState, { getFirebase }) => {
-//     const firebase = getFirebase()
-//     return firebase.auth().signInWithEmailAndPassword(
-//       credentials.email,
-//       credentials.password)
-//     .then(() => dispatch(sign_in()))
-//   }
-// }
-
 
 export const signOut = () => 
   (dispatch, getState, { getFirebase }) => {
     const firebase = getFirebase()
     return firebase.auth().signOut()
-    .then(() => dispatch(sign_out()))
+    .then(() => {
+      firebase.logout()
+      dispatch(sign_out())
+    })
   }
 
 
