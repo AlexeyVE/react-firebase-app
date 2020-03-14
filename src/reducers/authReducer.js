@@ -22,16 +22,13 @@ export default ( state = INITIAL_STATE, action ) => {
         authError: 'Login failed. ' + action.err
       }
     case LOGIN_SUCCESS:
-      console.log('Login success')
       return {
         ...state,
         authError: null
       }
     case SIGN_OUT:
-      console.log('Sign out success')
       return state
     case SIGNUP_SUCCESS:
-      console.log('signup success')
       return {
         ...state,
         authError: null
